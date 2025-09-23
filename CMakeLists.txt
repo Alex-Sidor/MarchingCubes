@@ -7,6 +7,15 @@ target_include_directories(glad PUBLIC deps/glad/include)
 
 add_subdirectory(deps/glfw)
 
+set(SHADERS_SRC "${CMAKE_SOURCE_DIR}/shaders")
+set(SHADERS_DST "${CMAKE_BINARY_DIR}/shaders")
+
+# Copy shaders every build
+add_custom_target(copy_shaders ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "${SHADERS_SRC}" "${SHADERS_DST}"
+    COMMENT "Copying shaders..."
+)
+
 find_package(OpenGL REQUIRED)
 
 file(GLOB SOURCES "src/*.cpp")
