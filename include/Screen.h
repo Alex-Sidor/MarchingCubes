@@ -11,7 +11,10 @@
 #include <GLFW/glfw3.h>
 
 #include "Shader.h"
-#include "vector.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Screen {
 public:
@@ -23,12 +26,13 @@ public:
 
     bool shouldClose();
 
+    glm::vec2 screenSize();
+
+    GLFWwindow* window = nullptr;
+
 private:
-    void processInput(GLFWwindow* window);
-    
     int width;
     int height;
 
-    GLFWwindow* window = nullptr;
-    GLuint texture = 0;
+    void processInput(GLFWwindow* window);
 };
