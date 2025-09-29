@@ -57,7 +57,7 @@ float vertices[] = {
 int main()
 {
 	Screen mainScreen(800,800);
-	Input input(mainScreen.window);
+	Input input(mainScreen);
 
 	Shader shader1("shaders/vert.s","shaders/frag.s");
 

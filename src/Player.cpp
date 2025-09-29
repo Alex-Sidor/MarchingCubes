@@ -19,7 +19,7 @@ void Player::updatePerspective(){
 }
 
 void Player::tick(Input input){
-    float rotateInput = (input.keyPressed(GLFW_KEY_LEFT)-input.keyPressed(GLFW_KEY_RIGHT)) * 1;
+    float rotateInput = (-input.frameMouseDelta().x);
 
     rotation.z += rotateInput;
     
