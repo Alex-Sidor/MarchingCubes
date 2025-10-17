@@ -20,8 +20,6 @@ public:
 private:
     static glm::vec2 mouseDelta;
 
-    static bool updatedMouseThisFrame;
-
     static glm::vec2 lastMousePosition;
 
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

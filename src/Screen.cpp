@@ -18,6 +18,15 @@ Screen::Screen(int x, int y) : width(x), height(y) {
     }
     glfwMakeContextCurrent(window);
 
+    //enable raw mouse input
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    if (glfwRawMouseMotionSupported()) {
+        glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+    } else {
+        throw std::runtime_error("Raw mouse motion NOT supported on this platform\n");
+    }
+
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
@@ -26,10 +35,6 @@ Screen::Screen(int x, int y) : width(x), height(y) {
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-
-    glClearColor(0.1f, 0.1f, 0.1f,1.0f);
-
-    //glEnable(GL_CULL_FACE);
 }
 
 void Screen::clearBuffer() {
