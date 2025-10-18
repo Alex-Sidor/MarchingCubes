@@ -1,13 +1,24 @@
-#include <Vector>
+#include <vector>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include <cstdlib>
+#include <ctime>
+
+#include <iostream>
 
 class MarchingCubes{
 public:
-    int size_x, size_y, size_z, size_xy;
+    int size_x, size_y, size_z, size_xz;
 
-    int* voxelData;
+    float surfaceCutoff = 0.0f;
 
-    std::vector<glm::vec3> vertexData;
-    std::vector<triangleIndex> indexData;
+    float* voxelData;
+
+    std::vector<float> vertexData;
+    std::vector<int> indexData;
 
     MarchingCubes(int X, int Y, int Z);
 
@@ -16,10 +27,29 @@ public:
     void generate();
 
 private:
-    int& voxelAt(int index);
+    glm::vec3 interpolate(glm::vec3 p0, glm::vec3 p1, float v0, float v1);
 
-    void calculateConfiguration(int index, int& config);
-}
+    void addTriangle(glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 offset);
+};
+
+const glm::vec3 vertexPositions[8] = 
+{
+    glm::vec3(0,0,0),
+    glm::vec3(1,0,0),
+    glm::vec3(1,0,1),
+    glm::vec3(0,0,1),
+    glm::vec3(0,1,0),
+    glm::vec3(1,1,0),
+    glm::vec3(1,1,1),
+    glm::vec3(0,1,1)
+};
+
+const std::vector<std::pair<int, int>> edgeToVertices = 
+        {
+            {0, 1}, {1, 2}, {2, 3}, {0, 3},
+            {4, 5}, {5, 6}, {6, 7}, {4, 7},
+            {0, 4}, {1, 5}, {2, 6}, {3, 7}
+        };
 
 const int edgeTable[256] =
 {

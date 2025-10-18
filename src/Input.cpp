@@ -39,12 +39,9 @@ void Input::key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 void Input::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-    printf("dx = %.6f, dy = %.6f\n", xpos, ypos);
-
     glm::vec2 current = glm::vec2(xpos,ypos);
     mouseDelta = (current - lastMousePosition);
     lastMousePosition = current;
-    std::cout << mouseDelta.x<<"\n";
 }
 
 void Input::pollInputs(){
