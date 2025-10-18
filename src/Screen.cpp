@@ -37,8 +37,6 @@ Screen::Screen(int x, int y) : width(x), height(y) {
     glDepthFunc(GL_LESS);
 
     glEnable(GL_CULL_FACE);
-    glCullFace(GL_FRONT);
-
 }
 
 void Screen::clearBuffer() {

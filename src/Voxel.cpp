@@ -16,13 +16,13 @@ MarchingCubes::MarchingCubes(int X, int Y, int Z){
     size_xz = X*Z;
 
     for(int i = 0; i < X*Y*Z; i++){
-        voxelData[i] = 3;
+        voxelData[i] = -1;
     }
 
     for(int z = 1; z < Z - 2; z++){
         for(int y = 1; y < Y - 2; y++){
             for(int x = 1; x < X - 2; x++){
-                voxelData[x + (y*size_x) + (z*size_x*size_y)] =  std::sqrt(((z -4) * (z -4)) + ((y -4) * (y -4)) + ((x -4) * (x -4)))/3; //randomFloat(-1.0f,1.0f);
+                voxelData[x + (y*size_x) + (z*size_x*size_y)] =  -std::sqrt(((z -4) * (z -4)) + ((y -4) * (y -4)) + ((x -4) * (x -4)))/3; //randomFloat(-1.0f,1.0f);
             }
         }
     }
@@ -48,7 +48,6 @@ MarchingCubes::~MarchingCubes(){
 
 glm::vec3 MarchingCubes::interpolate(glm::vec3 p0, glm::vec3 p1, float v0, float v1){
     float t = (surfaceCutoff - v0)/(v1-v0);
-    
     return (t * (p1 - p0)) + p0;
 }   
 
