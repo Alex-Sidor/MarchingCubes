@@ -87,7 +87,9 @@ int main()
 	while(!mainScreen.shouldClose()){ 
         float animationTimeValue = (float)glfwGetTime();
 
-        space1.surfaceCutoff = sin(animationTimeValue);
+        space1.surfaceCutoff = 0.5;
+        
+        //space1.surfaceCutoff = sin(animationTimeValue);
         
         space1.generate();
 

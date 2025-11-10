@@ -7,7 +7,7 @@ float randomFloat(float low, float high) {
 MarchingCubes::MarchingCubes(int X, int Y, int Z){
     srand(time(0));
 
-    voxelData = new float[X * Y * Z]();
+    voxelData = new float[X * Y * Z];
 
     size_x = X;
     size_y = Y;
@@ -15,7 +15,7 @@ MarchingCubes::MarchingCubes(int X, int Y, int Z){
 
     size_xz = X*Z;
 
-    for(int i = 0; i < X*Y*Z; i++){
+    /*for(int i = 0; i < X*Y*Z; i++){
         voxelData[i] = -1;
     }
 
@@ -25,7 +25,7 @@ MarchingCubes::MarchingCubes(int X, int Y, int Z){
                 voxelData[x + (y*size_x) + (z*size_x*size_y)] =  -std::sqrt(((z -4) * (z -4)) + ((y -4) * (y -4)) + ((x -4) * (x -4)))/3; //randomFloat(-1.0f,1.0f);
             }
         }
-    }
+    }*/
 }
 
 MarchingCubes::~MarchingCubes(){
