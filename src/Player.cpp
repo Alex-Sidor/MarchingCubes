@@ -23,7 +23,9 @@ void Player::tick(Input input){
 
     rotation.z += rotateInput;
     
-    glm::vec3 inputVector = glm::vec3(input.keyPressed(GLFW_KEY_A)-input.keyPressed(GLFW_KEY_D),0,input.keyPressed(GLFW_KEY_W)-input.keyPressed(GLFW_KEY_S));
+    glm::vec3 inputVector = glm::vec3(input.keyPressed(GLFW_KEY_A)-input.keyPressed(GLFW_KEY_D),
+        input.keyPressed(GLFW_KEY_E) - input.keyPressed(GLFW_KEY_Q),
+        input.keyPressed(GLFW_KEY_W)-input.keyPressed(GLFW_KEY_S));
     
     inputVector *= glm::vec3(.1f, .1f, .1f);
 
