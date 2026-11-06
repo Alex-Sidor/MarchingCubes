@@ -21,13 +21,15 @@ void Player::updatePerspective(){
 void Player::tick(Input input){
     float rotateInput = (-input.frameMouseDelta().x);
 
-    rotation.z += rotateInput;
+    rotation.z += rotateInput * 0.01;
     
-    glm::vec3 inputVector = glm::vec3(input.keyPressed(GLFW_KEY_A)-input.keyPressed(GLFW_KEY_D),0,input.keyPressed(GLFW_KEY_W)-input.keyPressed(GLFW_KEY_S));
+    glm::vec3 inputVector = glm::vec3(input.keyPressed(GLFW_KEY_A)-input.keyPressed(GLFW_KEY_D),
+        input.keyPressed(GLFW_KEY_E) - input.keyPressed(GLFW_KEY_Q),
+        input.keyPressed(GLFW_KEY_W)-input.keyPressed(GLFW_KEY_S));
     
     inputVector *= glm::vec3(.1f, .1f, .1f);
 
-    glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f), glm::radians(rotation.z), glm::vec3(0,1.0f,0));
+    glm::mat4 rotMat = glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0,1.0f,0));
 
     glm::vec4 rotated = rotMat * glm::vec4(inputVector, 1.0f);
 
@@ -37,7 +39,7 @@ void Player::tick(Input input){
 
 void Player::updateCameraView(){
     
-    glm::vec3 angleRadians = rotation / glm::vec3(57.2957795f, 57.2957795f, 57.2957795f); //convert degrees into radians
+    glm::vec3 angleRadians = rotation; //convert degrees into radians
 
     view = glm::lookAt(position, position + glm::vec3(sin(angleRadians.z),0,cos(angleRadians.z)), glm::vec3(0,1,0));
 }
